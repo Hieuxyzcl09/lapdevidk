@@ -1,0 +1,63 @@
+{
+    "name": "Lapdev Development Container",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "lapdev",
+    "workspaceFolder": "/workspace",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+        "ms-azuretools.vscode-docker",
+        "rust-lang.rust"
+    ],
+    "postCreateCommand": "apt-get update && apt-get install -y \
+    openssh-server \
+    python3 \
+    python3-pip \
+    python3-venv \
+    python3-flask \
+    wget \
+    ffmpeg \
+    curl \
+    nano \
+    git \
+    neofetch \
+    htop \
+    screen \
+    ffmpeg \
+    tzdata \
+    tmate \
+    speedtest-cli \
+    build-essential \
+    automake \
+    pkg-config \
+    libevent-dev \
+    libncurses5-dev \
+    bison \
+    iputils-ping \
+    lynx \
+    zip \
+    unzip \
+    unrar \
+    genisoimage \
+    xz-utils \
+    qemu-system-x86 \
+    tor \
+    torsocks \
+    ruby-full \
+    zlib1g-dev \
+    nodejs \
+    npm \
+    nginx \
+    gpg \
+    imagemagick \
+    webp \
+    curl \
+    libssl-dev \
+    libreadline-dev",
+    "portsAttributes": {
+        "8080": {
+            "label": "dashboard"
+        }
+    }
+}
