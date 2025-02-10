@@ -79,25 +79,26 @@ RUN pip3 install psutil schedule Pillow requests aiohttp numpy moviepy opencv-py
     #&& apt-get install -y dotnet-sdk-8.0 aspnetcore-runtime-8.0
 
 # Install Android SDK and build tools
-#RUN mkdir -p ${ANDROID_HOME} \
-    #&& cd ${ANDROID_HOME} \
-    #&& wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip \
-    #&& unzip commandlinetools-linux-*_latest.zip \
-    #&& rm commandlinetools-linux-*_latest.zip \
-    #&& mkdir -p ${ANDROID_HOME}/cmdline-tools/latest \
-    #&& mv cmdline-tools/* ${ANDROID_HOME}/cmdline-tools/latest \
-    #&& yes | sdkmanager --licenses \
-    #&& sdkmanager "platform-tools" \
-    #&& sdkmanager "build-tools;34.0.0" \
-    #&& sdkmanager "platforms;android-34" \
-    #&& sdkmanager "extras;android;m2repository" \
-    #&& sdkmanager "extras;google;m2repository"
+RUN mkdir -p ${ANDROID_HOME}/cmdline-tools \
+    && cd ${ANDROID_HOME}/cmdline-tools \
+    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip \
+    && unzip commandlinetools-linux-*_latest.zip \
+    && rm commandlinetools-linux-*_latest.zip \
+    && mkdir -p ${ANDROID_HOME}/cmdline-tools/latest \
+    && mv cmdline-tools/* ${ANDROID_HOME}/cmdline-tools/latest/ || true \
+    && cd ${ANDROID_HOME}/cmdline-tools \
+    && rm -rf cmdline-tools \
+    && cd ${ANDROID_HOME}/cmdline-tools/latest/bin \
+    && yes | ./sdkmanager --licenses \
+    && ./sdkmanager "platform-tools" \
+    && ./sdkmanager "platforms;android-34" \
+    && ./sdkmanager "build-tools;34.0.0"
 
 # Install Gradle
-#RUN wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip \
-    #&& unzip gradle-8.5-bin.zip -d /opt \
-    #&& rm gradle-8.5-bin.zip \
-    #&& ln -s /opt/gradle-8.5/bin/gradle /usr/bin/gradle
+RUN wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip \
+    && unzip gradle-8.5-bin.zip -d /opt \
+    && rm gradle-8.5-bin.zip \
+    && ln -s /opt/gradle-8.5/bin/gradle /usr/bin/gradle
 
 # Setup Ngrok
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
