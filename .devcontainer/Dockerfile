@@ -74,12 +74,13 @@ RUN pip3 install psutil schedule Pillow requests aiohttp numpy moviepy opencv-py
 RUN sudo add-apt-repository ppa:deadsnakes/ppa \
     && sudo apt update \
     && sudo apt-get install python3.11 python3.11-venv
+
 # Install .NET SDK
-#RUN wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
-    #&& dpkg -i packages-microsoft-prod.deb \
-    #&& rm packages-microsoft-prod.deb \
-    #&& apt-get update \
-    #&& apt-get install -y dotnet-sdk-8.0 aspnetcore-runtime-8.0
+RUN wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+    && dpkg -i packages-microsoft-prod.deb \
+    && rm packages-microsoft-prod.deb \
+    && apt-get update \
+    && apt-get install -y dotnet-sdk-8.0 aspnetcore-runtime-8.0
 
 # Install Android SDK and build tools
 RUN mkdir -p ${ANDROID_HOME}/cmdline-tools \
