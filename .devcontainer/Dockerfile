@@ -6,7 +6,6 @@ ENV ANDROID_HOME=/opt/android-sdk
 ENV DOTNET_ROOT=/usr/share/dotnet
 ENV PATH=$PATH:$DOTNET_ROOT:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
 
-# Install necessary packages (removed duplicates like ffmpeg, curl)
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
@@ -73,32 +72,32 @@ RUN pip3 install psutil schedule Pillow requests aiohttp numpy moviepy opencv-py
     beautifulsoup4 flask
 
 # Install .NET SDK
-RUN wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
-    && dpkg -i packages-microsoft-prod.deb \
-    && rm packages-microsoft-prod.deb \
-    && apt-get update \
-    && apt-get install -y dotnet-sdk-8.0 aspnetcore-runtime-8.0
+#RUN wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+    #&& dpkg -i packages-microsoft-prod.deb \
+    #&& rm packages-microsoft-prod.deb \
+    #&& apt-get update \
+    #&& apt-get install -y dotnet-sdk-8.0 aspnetcore-runtime-8.0
 
 # Install Android SDK and build tools
-RUN mkdir -p ${ANDROID_HOME} \
-    && cd ${ANDROID_HOME} \
-    && wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip \
-    && unzip commandlinetools-linux-*_latest.zip \
-    && rm commandlinetools-linux-*_latest.zip \
-    && mkdir -p ${ANDROID_HOME}/cmdline-tools/latest \
-    && mv cmdline-tools/* ${ANDROID_HOME}/cmdline-tools/latest \
-    && yes | sdkmanager --licenses \
-    && sdkmanager "platform-tools" \
-    && sdkmanager "build-tools;34.0.0" \
-    && sdkmanager "platforms;android-34" \
-    && sdkmanager "extras;android;m2repository" \
-    && sdkmanager "extras;google;m2repository"
+#RUN mkdir -p ${ANDROID_HOME} \
+    #&& cd ${ANDROID_HOME} \
+    #&& wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip \
+    #&& unzip commandlinetools-linux-*_latest.zip \
+    #&& rm commandlinetools-linux-*_latest.zip \
+    #&& mkdir -p ${ANDROID_HOME}/cmdline-tools/latest \
+    #&& mv cmdline-tools/* ${ANDROID_HOME}/cmdline-tools/latest \
+    #&& yes | sdkmanager --licenses \
+    #&& sdkmanager "platform-tools" \
+    #&& sdkmanager "build-tools;34.0.0" \
+    #&& sdkmanager "platforms;android-34" \
+    #&& sdkmanager "extras;android;m2repository" \
+    #&& sdkmanager "extras;google;m2repository"
 
 # Install Gradle
-RUN wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip \
-    && unzip gradle-8.5-bin.zip -d /opt \
-    && rm gradle-8.5-bin.zip \
-    && ln -s /opt/gradle-8.5/bin/gradle /usr/bin/gradle
+#RUN wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip \
+    #&& unzip gradle-8.5-bin.zip -d /opt \
+    #&& rm gradle-8.5-bin.zip \
+    #&& ln -s /opt/gradle-8.5/bin/gradle /usr/bin/gradle
 
 # Setup Ngrok
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
