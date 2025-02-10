@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   lapdev:
     image: ubuntu:24.04
@@ -7,8 +7,27 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ..:/workspace:cached
+      - ~/.ssh:/root/.ssh:ro
+      - /var/run/docker.sock:/var/run/docker.sock
     command: /bin/bash -c "while sleep 1000; do :; done"
     ports:
-      - "8080:8080"
+      - "8080:8080"  # Web app
+      - "5000-5001:5000-5001"  # .NET ports
+      - "5037:5037"  # ADB
+    environment:
+      - DOTNET_ROOT=/usr/share/dotnet
+      - ANDROID_HOME=/opt/android-sdk
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
   db:
-    image: docker.io/postgres:latest
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: devpassword
+      POSTGRES_USER: devuser
+      POSTGRES_DB: devdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
