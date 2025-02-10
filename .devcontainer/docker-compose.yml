@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    privileged: true
     volumes:
       - ..:/workspace:cached
       - ~/.ssh:/root/.ssh:ro
