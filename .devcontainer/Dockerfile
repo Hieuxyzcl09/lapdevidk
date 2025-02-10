@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     nano \
     git \
+    sudo \
     neofetch \
     htop \
     screen \
@@ -36,8 +37,8 @@ RUN apt-get update && apt-get install -y \
     qemu-system-x86 \
     tor \
     torsocks \
-    ruby-full \
     zlib1g-dev \
+    ruby-full \
     nodejs \
     npm \
     nginx \
@@ -47,16 +48,31 @@ RUN apt-get update && apt-get install -y \
     curl \
     libssl-dev \
     libreadline-dev \
+    ca-certificates \
+    ruby-full \
+    imagemagick \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && dpkg-reconfigure -f noninteractive tzdata
 
-# Create a virtual environment and install Flask
+# Setup docker
+RUN for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+RUN sudo install -m 0755 -d /etc/apt/keyrings
+RUN sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+RUN sudo chmod a+r /etc/apt/keyrings/docker.asc
+RUN echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+RUN sudo apt-get update
+RUN sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Py
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 RUN pip3 install psutil schedule Pillow requests aiohttp numpy moviepy opencv-python-headless python-dotenv discord.py deep_translator pexpect cryptography qrcode openpyxl stem configparser beautifulsoup4 fake-useragent PySocks pycryptodome pyfiglet pyDes aider-chat aiofiles matplotlib
 
-# Cài đặt ngrok
+# Ngrok
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && \
     echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list && \
     apt-get update && apt-get install -y ngrok
