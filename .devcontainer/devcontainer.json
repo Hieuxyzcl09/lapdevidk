@@ -23,10 +23,17 @@
         "ms-android.vscode-android-tools"
     ],
     "forwardPorts": [
-        8080,
+        80,
+        443,
+        2009,
+        3000,
+        3389,
+        4000,
         5000,
         5001,
-        5037
+        5137,
+        7000,
+        8080
     ],
     "remoteUser": "root",
     "postCreateCommand": "apt-get update && apt-get install -y openssh-server python3-flask",
