@@ -52,6 +52,9 @@ RUN apt-get update && apt-get install -y \
     libreadline-dev \
     ca-certificates \
     openjdk-17-jdk \
+    zsh-autosuggestions \
+    zsh-syntax-highlighting \
+    zsh \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && dpkg-reconfigure -f noninteractive tzdata
 
@@ -135,5 +138,7 @@ RUN mkdir -p /root/.config/ngrok \
     && mkdir -p /home/ubuntu/.config/ngrok \
     && echo "version: \"2\"" > /home/ubuntu/.config/ngrok/ngrok.yml
 
+RUN hostname hieuxyz
+RUN echo "hieuxyz" > /etc/hostname
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
