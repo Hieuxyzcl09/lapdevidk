@@ -73,9 +73,9 @@ RUN pip3 install psutil schedule Pillow requests aiohttp numpy moviepy opencv-py
     python-dotenv discord.py deep_translator pexpect cryptography qrcode openpyxl stem configparser \
     beautifulsoup4 flask
 
-RUN sudo add-apt-repository ppa:deadsnakes/ppa \
-    && sudo apt update \
-    && sudo apt-get install python3.11 python3.11-venv
+#RUN sudo add-apt-repository ppa:deadsnakes/ppa \
+    #&& sudo apt update \
+    #&& sudo apt-get install python3.11 python3.11-venv
 
 # Install .NET SDK
 RUN wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
