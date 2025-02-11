@@ -7,6 +7,8 @@ ENV DOTNET_ROOT=/usr/share/dotnet
 ENV PATH=$PATH:$DOTNET_ROOT:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
 
 RUN apt-get update && apt-get install -y \
+    apt-utils \
+    software-properties-common \
     python3 \
     python3-pip \
     python3-venv \
