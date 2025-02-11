@@ -104,6 +104,25 @@ RUN wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip \
     && rm gradle-8.5-bin.zip \
     && ln -s /opt/gradle-8.5/bin/gradle /usr/bin/gradle
 
+# Thêm repository Mono
+RUN apt install -y gnupg ca-certificates
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list
+
+# Cài đặt MSBuild và dependencies
+RUN apt-get update && apt-get install -y \
+    mono-devel \
+    msbuild \
+    g++-mingw-w64 \
+    mono-complete
+
+# Tải và cài đặt NuGet CLI
+RUN curl -L -o /usr/local/bin/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+RUN echo '#!/bin/bash' > /usr/local/bin/nuget
+RUN echo 'mono /usr/local/bin/nuget.exe "$@"' >> /usr/local/bin/nuget
+RUN chmod 755 /usr/local/bin/nuget
+
+
 # Setup Ngrok
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
     && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list \
