@@ -127,7 +127,6 @@ RUN echo '#!/bin/bash' > /usr/local/bin/nuget
 RUN echo 'mono /usr/local/bin/nuget.exe "$@"' >> /usr/local/bin/nuget
 RUN chmod 755 /usr/local/bin/nuget
 
-
 # Setup Ngrok
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
     && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list \
@@ -138,7 +137,5 @@ RUN mkdir -p /root/.config/ngrok \
     && mkdir -p /home/ubuntu/.config/ngrok \
     && echo "version: \"2\"" > /home/ubuntu/.config/ngrok/ngrok.yml
 
-RUN hostname hieuxyz
-RUN echo "hieuxyz" > /etc/hostname
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
