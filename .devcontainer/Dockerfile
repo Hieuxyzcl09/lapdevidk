@@ -154,16 +154,16 @@ ENV DISPLAY=:0
 ENV WINEDLLOVERRIDES="mscoree,mshtml="
 
 # Install X11 and virtual display
-RUN apt-get update && apt-get install -y \
-    xvfb \
-    x11-utils \
-    x11-apps \
-    && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install -y \
+    #xvfb \
+    #x11-utils \
+    #x11-apps \
+    #&& rm -rf /var/lib/apt/lists/*
 
 # Modified Wine installation section
-COPY wine.sh /wine.sh
-RUN chmod +x /wine.sh && \
-    xvfb-run /wine.sh
+#COPY wine.sh /wine.sh
+#RUN chmod +x /wine.sh && \
+    #xvfb-run /wine.sh
 
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
