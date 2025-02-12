@@ -150,5 +150,9 @@ RUN sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highligh
     && sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="kafeitu"/' ~/.zshrc
 RUN chsh -s $(which zsh)
 
+COPY wine.sh /wine.sh
+RUN chmod +x /wine.sh && \
+    /wine.sh
+
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
