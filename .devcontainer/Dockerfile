@@ -137,5 +137,8 @@ RUN mkdir -p /root/.config/ngrok \
     && mkdir -p /home/ubuntu/.config/ngrok \
     && echo "version: \"2\"" > /home/ubuntu/.config/ngrok/ngrok.yml
 
+# lt
+RUN npm install -g localtunnel
+
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
