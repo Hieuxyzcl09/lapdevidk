@@ -140,7 +140,7 @@ RUN mkdir -p /root/.config/ngrok \
 # lt
 RUN npm install -g localtunnel
 
-ZSH_CUSTOM="/root/.oh-my-zsh/custom"
+ENV ZSH_CUSTOM="/root/.oh-my-zsh/custom"
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
