@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Start virtual framebuffer
+Xvfb :0 -screen 0 1024x768x16 &
+sleep 2  # Wait for Xvfb to start
+
 # Cập nhật hệ thống
 sudo apt update && sudo apt upgrade -y
 
@@ -17,7 +21,7 @@ echo "deb [signed-by=/etc/apt/keyrings/winehq-archive.key] https://dl.winehq.org
 sudo apt update
 
 # Cài đặt Wine
-sudo apt install --install-recommends winehq-stable -y
+DEBIAN_FRONTEND=noninteractive sudo apt install --install-recommends winehq-stable -y
 
 # Xác minh cài đặt
 wine --version
@@ -25,11 +29,24 @@ wine --version
 # Thiết lập biến môi trường WINEPREFIX
 export WINEPREFIX=~/.wine
 
-# Khởi tạo tiền tố Wine
-wineboot --init
+# Khởi tạo tiền tố Wine với virtual display
+DISPLAY=:0 wineboot --init
 
 # Cài đặt winetricks
 sudo apt install winetricks -y
 
-# Cài đặt một số thư viện phổ biến (tùy chọn, có thể mất nhiều thời gian)
-winetricks corefonts vcrun6 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 vcrun2019 dotnet48
+# Cài đặt một số thư viện phổ biến với virtual display
+DISPLAY=:0 winetricks -q corefonts
+DISPLAY=:0 winetricks -q vcrun6
+DISPLAY=:0 winetricks -q vcrun2005
+DISPLAY=:0 winetricks -q vcrun2008
+DISPLAY=:0 winetricks -q vcrun2010
+DISPLAY=:0 winetricks -q vcrun2012
+DISPLAY=:0 winetricks -q vcrun2013
+DISPLAY=:0 winetricks -q vcrun2015
+DISPLAY=:0 winetricks -q vcrun2017
+DISPLAY=:0 winetricks -q vcrun2019
+DISPLAY=:0 winetricks -q dotnet48
+
+# Kill Xvfb
+pkill Xvfb
