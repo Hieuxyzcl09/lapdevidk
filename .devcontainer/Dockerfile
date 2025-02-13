@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     python3-venv \
     wget \
     ffmpeg \
+    atomicparsley \
     curl \
     nano \
     git \
@@ -72,7 +73,7 @@ RUN for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-dock
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-RUN pip3 install psutil schedule Pillow requests aiohttp numpy moviepy opencv-python-headless python-dotenv discord.py discord-ui deep_translator pexpect cryptography qrcode openpyxl stem configparser beautifulsoup4 flask paramiko scp psutil humanize aiofiles
+RUN pip3 install psutil schedule Pillow requests aiohttp numpy moviepy opencv-python-headless python-dotenv discord.py discord-ui deep_translator pexpect cryptography qrcode openpyxl stem configparser beautifulsoup4 flask paramiko scp psutil humanize aiofiles pandas scipy sqlalchemy fastapi httpx uvicorn pydantic black pylint pytest python-jose pyinstaller tqdm click python-multipart colorama python-magic bcrypt pyotp validators yt-dlp ffmpeg-python pytube pafy pydub pygame sounddevice soundfile librosa av python-vlc streamlink imageio scikit-image mutagen pyshorteners pycaption youtube-search-python m3u8 rich aiohappyeyeballs multidict mpmath mdurl markdown-it-py idna frozenlist charset-normalizer certifi aiosignal attrs
 
 RUN curl -SsL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/playit.gpg >/dev/null
 RUN echo "deb [signed-by=/etc/apt/trusted.gpg.d/playit.gpg] https://playit-cloud.github.io/ppa/data ./" | sudo tee /etc/apt/sources.list.d/playit-cloud.list
