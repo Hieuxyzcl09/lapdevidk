@@ -152,7 +152,7 @@ RUN git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git 
 RUN git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
 RUN sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)/' ~/.zshrc \
     && sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="kafeitu"/' ~/.zshrc
-RUN chsh -s $(which zsh)
+#RUN chsh -s $(which zsh)
 
 ENV DISPLAY=:0
 ENV WINEDLLOVERRIDES="mscoree,mshtml="
