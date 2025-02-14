@@ -40,7 +40,9 @@
     "remoteUser": "root",
     "postCreateCommand": "apt-get update && apt-get install -y openssh-server python3-flask",
     "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "privileged": true
+        }
     },
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
