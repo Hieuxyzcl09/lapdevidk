@@ -33,7 +33,9 @@
         5001,
         5137,
         7000,
-        8080
+        8080,
+        25565,
+        25575
     ],
     "remoteUser": "root",
     "postCreateCommand": "apt-get update && apt-get install -y openssh-server python3-flask",
