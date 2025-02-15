@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     python3-venv \
+    python3-full \
     wget \
     ffmpeg \
     atomicparsley \
@@ -52,7 +53,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libreadline-dev \
     ca-certificates \
-    openjdk-17-jdk \
+    openjdk-21-jdk \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
     zsh \
