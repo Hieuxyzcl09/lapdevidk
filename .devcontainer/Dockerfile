@@ -53,6 +53,8 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libreadline-dev \
     ca-certificates \
+    openjdk-8-jdk \
+    openjdk-17-jdk \
     openjdk-21-jdk \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
