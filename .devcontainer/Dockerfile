@@ -183,6 +183,8 @@ ENV WINEDLLOVERRIDES="mscoree,mshtml="
 #RUN chmod +x /wine.sh && \
     #xvfb-run /wine.sh
 
+RUN echo "127.0.0.1 hieuxyz" | sudo tee -a /etc/hosts
+
 RUN apt-get update && apt full-upgrade -y
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
