@@ -60,6 +60,15 @@ RUN apt-get update && apt-get install -y \
     zsh-syntax-highlighting \
     zsh \
     neovim \
+    gcc \
+    make \
+    libsdl2-dev \
+    libsdl2-ttf-dev \
+    tigervnc-standalone-server \
+    gnome-shell \
+    ubuntu-gnome-desktop \
+    gnome-tweaks \
+    xterm \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && dpkg-reconfigure -f noninteractive tzdata
 
